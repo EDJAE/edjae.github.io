@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edjae Ursal Personal Info</title>
+  <meta name="description" content="Portfolio of Edjae Ursal, BSCS student at Tangub City Global College — building software, breaking bugs, one commit at a time." />
+
+  <!-- ============ FONTS ============ -->
+  <!-- Space Grotesk: display headings | Inter: body copy | Poppins: UI labels & nav -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- ============ ICONS ============ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================================================================
+       LOADING SCREEN — terminal boot sequence tied to Edjae's CS identity
+       ================================================================ -->
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader__terminal">
+      <span class="loader__prompt">$</span>
+      <span id="loaderText" class="loader__text"></span><span class="loader__cursor">▌</span>
+    </div>
+  </div>
+
+  <!-- Scroll progress bar -->
+  <div id="scrollProgress" class="scroll-progress"></div>
+
+  <!-- ================================================================
+       NAVIGATION
+       ================================================================ -->
+  <header id="navbar" class="navbar">
+    <nav class="navbar__inner">
+      <a href="#home" class="navbar__logo">Edjae<span class="dot">.</span></a>
+
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="#home" class="nav-link active" data-link>Home</a></li>
+        <li><a href="#about" class="nav-link" data-link>About</a></li>
+        <li><a href="#skills" class="nav-link" data-link>Skills</a></li>
+        <li class="nav-item nav-item--dropdown" id="projectsDropdown">
+          <a href="#projects" class="nav-link nav-link--dropdown" data-link id="projectsDropdownTrigger" aria-haspopup="true" aria-expanded="false">
+            Projects <i class="fa-solid fa-chevron-down dropdown-caret"></i>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="projectsDropdownTrigger">
+            <li role="none"><a href="#projects" class="dropdown-link" data-link data-project="Regular Expression Game" role="menuitem">Regular Expression Game</a></li>
+            <li role="none"><a href="#projects" class="dropdown-link" data-link data-project="Online Food Ordering System" role="menuitem">Online Food Ordering System</a></li>
+            <li role="none"><a href="#projects" class="dropdown-link" data-link data-project="TCGC Confession App" role="menuitem">TCGC Confession App</a></li>
+            <li role="none"><a href="#projects" class="dropdown-link" data-link data-project="All Anime Characters" role="menuitem">All Anime Characters</a></li>
+            <li role="none"><a href="#projects" class="dropdown-link" data-link data-project="Compile// Lexical Console" role="menuitem">Compile// Lexical Console</a></li>
+            <li role="none"><a href="#projects" class="dropdown-link" data-link data-project="This Portfolio" role="menuitem">This Portfolio</a></li>
+          </ul>
+        </li>
+        <li><a href="#timeline" class="nav-link" data-link>Timeline</a></li>
+        <li><a href="#services" class="nav-link" data-link>Services</a></li>
+        <li><a href="#contact" class="nav-link" data-link>Contact</a></li>
+      </ul>
+
+
+      <button id="navToggle" class="navbar__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ================================================================
+         HERO
+         ================================================================ -->
+    <section id="home" class="hero">
+      <div class="hero__blobs" aria-hidden="true">
+        <div class="blob blob--1"></div>
+        <div class="blob blob--2"></div>
+        <div class="blob blob--3"></div>
+      </div>
+      <canvas id="particles" class="hero__particles" aria-hidden="true"></canvas>
+
+      <div class="hero__inner container">
+        <div class="hero__content" data-reveal>
+          <p class="eyebrow">Hello, I'm</p>
+          <h1 class="hero__name">Edjae Ursal</h1>
+          <h2 class="hero__title">
+            <span id="typed" class="typed"></span><span class="typed-cursor">|</span>
+          </h2>
+          <p class="hero__desc">
+            BSCS student at Tangub City Global College, based in Tangub City, Misamis Occidental.
+            I like turning coursework into working software from lexical analyzers to full CRUD systems
+            and I'm most awake at 2am chasing down one last bug.And i still a student but but i have a lot
+             of experience in programing.
+          </p>
+          <div class="hero__cta">
+            <a href="resume/Edjae_Ursal_Premium_Resume.docx" class="btn btn--primary ripple magnetic" download>
+              <i class="fa-solid fa-download"></i> Download Resume
+            </a>
+            <a href="#projects" class="btn btn--outline ripple magnetic" data-link>
+              <i class="fa-solid fa-arrow-right"></i> View Projects
+            </a>
+          </div>
+
+          <div class="hero__socials">
+            <a href="https://github.com/EDJAE" target="_blank" rel="noopener" aria-label="GitHub" class="social-icon"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.facebook.com/aifhshcj" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/ur_edjae/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="hero__visual" data-reveal data-reveal-delay="150">
+          <div class="hero__ring" id="tiltCard">
+            <!-- Replace with images/profile.jpg for a real photo -->
+             <img src="images/ur_edjae.jpg" alt="Edjae Ursal" class="hero__avatar">
+          </div>
+          <div class="hero__badge hero__badge--1"><i class="fa-solid fa-code"></i> BSCS</div>
+          <div class="hero__badge hero__badge--2"><i class="fa-solid fa-location-dot"></i> Tangub City</div>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-hint" data-link aria-label="Scroll down">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ================================================================
+         ABOUT
+         ================================================================ -->
+    <section id="about" class="section about">
+      <div class="container">
+        <p class="section__eyebrow" data-reveal>About Me</p>
+        <h2 class="section__title" data-reveal>Building things, breaking things, learning either way.</h2>
+
+        <div class="about__grid">
+          <div class="about__text" data-reveal>
+            <p>
+              I'm a Computer Science undergraduate at <strong>Tangub City Global College (TCGC)</strong>,
+              working through coursework in software development,research methods, and
+              cybersecurity and enjoying almost all of it more than I expected to.
+            </p>
+            <p>
+              My objective is simple: become a software engineer who can move comfortably between the
+              front end, the back end, and the database and who understands the security implications
+              of every layer in between. Recent work includes a full suite of PHP + MySQL CRUD APIs, a
+              browser-based lexical analyzer, and a cybersecurity case study on the Philippine Senate
+              website defacement incident.
+            </p>
+            <p>
+              Outside of class, I'm usually deep in a personal tool, a thesis draft, or a rabbit hole
+              about how compilers actually work.
+            </p>
+          </div>
+
+          <div class="about__card" data-reveal data-reveal-delay="150">
+            <h3>Quick Facts</h3>
+            <ul class="facts">
+              <li><i class="fa-solid fa-graduation-cap"></i> <div><span>Education</span>BSCS, Tangub City Global College</div></li>
+              <li><i class="fa-solid fa-location-dot"></i> <div><span>Based in</span>Tangub City, Misamis Occidental</div></li>
+              <li><i class="fa-solid fa-language"></i> <div><span>Languages</span>English, Filipino, Cebuano/Bisaya</div></li>
+              <li><i class="fa-solid fa-crosshairs"></i> <div><span>Focus</span>Full-Stack Dev & Cybersecurity</div></li>
+              <li><i class="fa-solid fa-mug-hot"></i> <div><span>Currently</span>Writing my thesis proposal</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STATISTICS
+         ================================================================ -->
+    <section class="stats">
+      <div class="container stats__grid">
+        <div class="stat" data-reveal>
+          <span class="stat__num" data-count="9">0</span><span class="stat__plus">+</span>
+          <p>Projects Built</p>
+        </div>
+        <div class="stat" data-reveal data-reveal-delay="200">
+          <span class="stat__num" data-count="18">0</span><span class="stat__plus">+</span>
+          <p>Skills & Tools</p>
+        </div>
+        <div class="stat" data-reveal data-reveal-delay="300">
+          <span class="stat__num" data-count="3">0</span><span class="stat__plus">+</span>
+          <p>Years Learning to Code</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         SKILLS
+         ================================================================ -->
+    <section id="skills" class="section skills">
+      <div class="container">
+        <p class="section__eyebrow" data-reveal>What I Work With</p>
+        <h2 class="section__title" data-reveal>Skills &amp; Tools</h2>
+
+        <div class="skills__tabs" role="tablist" data-reveal>
+          <button class="skills__tab active" data-tab="languages">Languages</button>
+          <button class="skills__tab" data-tab="frameworks">Frameworks</button>
+          <button class="skills__tab" data-tab="tools">Tools</button>
+          <button class="skills__tab" data-tab="soft">Soft Skills</button>
+        </div>
+
+        <!-- Programming Languages -->
+        <div class="skills__panel active" data-panel="languages">
+          <div class="skill-grid">
+            <div class="skill-card" data-reveal><i class="fa-brands fa-html5"></i><h4>HTML</h4><div class="bar"><span style="--pct:95%"></span></div><em>95%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="50"><i class="fa-brands fa-css3-alt"></i><h4>CSS</h4><div class="bar"><span style="--pct:90%"></span></div><em>90%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="100"><i class="fa-brands fa-js"></i><h4>JavaScript</h4><div class="bar"><span style="--pct:80%"></span></div><em>80%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="150"><i class="fa-brands fa-java"></i><h4>Java</h4><div class="bar"><span style="--pct:75%"></span></div><em>75%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="200"><i class="fa-brands fa-python"></i><h4>Python</h4><div class="bar"><span style="--pct:70%"></span></div><em>70%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="250"><i class="fa-solid fa-hashtag"></i><h4>C#</h4><div class="bar"><span style="--pct:65%"></span></div><em>65%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="300"><i class="fa-solid fa-database"></i><h4>SQL</h4><div class="bar"><span style="--pct:85%"></span></div><em>85%</em></div>
+          </div>
+        </div>
+
+        <!-- Frameworks -->
+        <div class="skills__panel" data-panel="frameworks">
+          <div class="skill-grid">
+            <div class="skill-card" data-reveal><i class="fa-solid fa-mobile-screen"></i><h4>Flutter</h4><div class="bar"><span style="--pct:60%"></span></div><em>60%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="50"><i class="fa-brands fa-microsoft"></i><h4>ASP.NET</h4><div class="bar"><span style="--pct:60%"></span></div><em>60%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="100"><i class="fa-solid fa-fire"></i><h4>Firebase</h4><div class="bar"><span style="--pct:55%"></span></div><em>55%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="150"><i class="fa-brands fa-node-js"></i><h4>Node.js</h4><div class="bar"><span style="--pct:55%"></span></div><em>55%</em></div>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="skills__panel" data-panel="tools">
+          <div class="skill-grid">
+            <div class="skill-card" data-reveal><i class="fa-brands fa-git-alt"></i><h4>Git</h4><div class="bar"><span style="--pct:85%"></span></div><em>85%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="50"><i class="fa-brands fa-github"></i><h4>GitHub</h4><div class="bar"><span style="--pct:85%"></span></div><em>85%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="100"><i class="fa-solid fa-code"></i><h4>VS Code</h4><div class="bar"><span style="--pct:95%"></span></div><em>95%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="150"><i class="fa-regular fa-window-restore"></i><h4>Visual Studio</h4><div class="bar"><span style="--pct:70%"></span></div><em>70%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="200"><i class="fa-brands fa-figma"></i><h4>Figma</h4><div class="bar"><span style="--pct:65%"></span></div><em>65%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="250"><i class="fa-solid fa-server"></i><h4>XAMPP</h4><div class="bar"><span style="--pct:80%"></span></div><em>80%</em></div>
+            <div class="skill-card" data-reveal data-reveal-delay="300"><i class="fa-solid fa-database"></i><h4>MySQL / HeidiSQL</h4><div class="bar"><span style="--pct:85%"></span></div><em>85%</em></div>
+          </div>
+        </div>
+
+        <!-- Soft Skills -->
+        <div class="skills__panel" data-panel="soft">
+          <div class="soft-grid">
+            <div class="soft-pill" data-reveal><i class="fa-solid fa-people-group"></i> Leadership</div>
+            <div class="soft-pill" data-reveal data-reveal-delay="50"><i class="fa-solid fa-comments"></i> Communication</div>
+            <div class="soft-pill" data-reveal data-reveal-delay="100"><i class="fa-solid fa-brain"></i> Critical Thinking</div>
+            <div class="soft-pill" data-reveal data-reveal-delay="150"><i class="fa-solid fa-puzzle-piece"></i> Problem Solving</div>
+            <div class="soft-pill" data-reveal data-reveal-delay="200"><i class="fa-solid fa-handshake"></i> Teamwork</div>
+            <div class="soft-pill" data-reveal data-reveal-delay="250"><i class="fa-solid fa-clock"></i> Time Management</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         PROJECTS
+         ================================================================ -->
+    <section id="projects" class="section projects">
+      <div class="container">
+        <p class="section__eyebrow" data-reveal>Selected Work</p>
+        <h2 class="section__title" data-reveal>Featured Projects</h2>
+
+        <div class="project-grid">
+
+          <article class="project-card project-card--centered" data-reveal>
+            <div class="project-card__media">
+              <img src="images/RegEx_Game.png" alt="Regex Challenge game preview" class="project-card__image">
+            </div>
+            <div class="project-card__body">
+              <div class="badges">
+                <span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">JavaScript</span>
+              </div>
+              <h3>Regular Expression Game</h3>
+              <p>A fun, browser-based game that helps players practice identifying and matching regular expressions through interactive challenges built with HTML, CSS, and JavaScript.</p>
+              <div class="project-card__links">
+                <a href="https://github.com/edjae" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card project-card--centered" data-reveal data-reveal-delay="100">
+            <div class="project-card__media">
+              <img src="images/online_food_ordering.png" alt="Online Food Ordering System preview" class="project-card__image">
+            </div>
+            <div class="project-card__body">
+              <div class="badges">
+                <span class="badge">C#</span><span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">Bootstrap</span><span class="badge">SQL</span>
+              </div>
+              <h3>Online Food Ordering System</h3>
+              <p>A restaurant ordering system with menu browsing, customer orders, order tracking, and CRUD operations powered by PHP and MySQL.</p>
+              <div class="project-card__links">
+                <a href="https://github.com/edjae" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card project-card--centered" data-reveal data-reveal-delay="200">
+            <div class="project-card__media">
+              <img src="images/confess.png" alt="TCGC Confession App preview" class="project-card__image">
+            </div>
+            <div class="project-card__body">
+              <div class="badges">
+                <span class="badge">Flutter</span><span class="badge">Firebase</span>
+              </div>
+              <h3>TCGC Confession App</h3>
+              <p>An anonymous confession &amp; announcement board built for the TCGC student community, focused on simple moderation, fast posting, and a friendly, familiar interface.</p>
+              <div class="project-card__links">
+                <a href="https://github.com/edjae" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card project-card--centered" data-reveal>
+            <div class="project-card__media">
+              <img src="images/anime.jpg" alt="All Anime Characters project preview" class="project-card__image">
+            </div>
+            <div class="project-card__body">
+              <div class="badges">
+                <span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">API</span>
+              </div>
+              <h3>All Anime Characters</h3>
+              <p>An anime character collection that lets fans explore memorable characters, discover details about their abilities and stories, and enjoy a colorful anime-inspired experience.</p>
+              <div class="project-card__links">
+                <a href="https://github.com/edjae" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card project-card--centered" data-reveal data-reveal-delay="100">
+            <div class="project-card__media">
+              <img src="images/lex.png" alt="Lexical Console project preview" class="project-card__image">
+            </div>
+            <div class="project-card__body">
+              <div class="badges">
+                <span class="badge">HTML/CSS/JS</span><span class="badge">Compilers</span>
+              </div>
+              <h3>Compile// Lexical Console</h3>
+              <p>A browser-based lexical analyzer that breaks source code into tokens and helps learners understand identifiers, keywords, literals, and symbols through a live console.</p>
+              <div class="project-card__links">
+                <a href="https://github.com/edjae" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card project-card--centered" data-reveal data-reveal-delay="200">
+            <div class="project-card__media">
+              <img src="images/edjae.png" alt="Edjae portfolio preview" class="project-card__image">
+            </div>
+            <div class="project-card__body">
+              <div class="badges">
+                <span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">Vanilla JS</span>
+              </div>
+              <h3>This Portfolio</h3>
+              <p>You're looking at it — a hand-built, framework-free portfolio focused on smooth motion, accessible interactions, and a design system that's easy for me to keep extending.</p>
+              <div class="project-card__links">
+                <a href="https://github.com/edjae" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         TIMELINE
+         ================================================================ -->
+    <section id="timeline" class="section timeline">
+      <div class="container">
+        <p class="section__eyebrow" data-reveal>My Journey</p>
+        <h2 class="section__title" data-reveal>Education &amp; Milestones</h2>
+
+        <div class="timeline__track">
+          <div class="timeline__item" data-reveal>
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <span class="timeline__date">Ongoing</span>
+              <h3>BSCS Tangub City Global College</h3>
+              <p>Coursework spanning software development, linear algebra, research methods, and cybersecurity; currently developing a thesis proposal on an Online Learning &amp; Student Assessment System.</p>
+            </div>
+          </div>
+
+          <div class="timeline__item" data-reveal data-reveal-delay="100">
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <span class="timeline__date">Case Study</span>
+              <h3>Cybersecurity Case Study Senate Website Defacement</h3>
+              <p>Researched and presented a 7-slide case study analyzing the Philippine Senate website defacement incident, covering attack vectors and mitigation strategies.</p>
+            </div>
+          </div>
+
+          <div class="timeline__item" data-reveal>
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <span class="timeline__date">Final Project</span>
+              <h3>Nine-API PHP + MySQL Suite</h3>
+              <p>Designed and built nine complete themed CRUD APIs Student Management, Patient Management, Restaurant Menu, Attendance, Library, Events, Inventory, and more — each with its own frontend.</p>
+            </div>
+          </div>
+
+          <div class="timeline__item" data-reveal data-reveal-delay="100">
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <span class="timeline__date">Reading</span>
+              <h3>Gray Hat Hacking, 6th Edition Book Review</h3>
+              <p>Completed an in-depth review connecting offensive security concepts to practical, defensible coding habits.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         SERVICES
+         ================================================================ -->
+    <section id="services" class="section services">
+      <div class="container">
+        <p class="section__eyebrow" data-reveal>What I Can Help With</p>
+        <h2 class="section__title" data-reveal>Services</h2>
+
+        <div class="service-grid">
+          <div class="service-card" data-reveal><i class="fa-solid fa-globe"></i><h3>Web Development</h3><p>Responsive, accessible websites built with clean HTML, CSS, and JavaScript.</p></div>
+          <div class="service-card" data-reveal data-reveal-delay="50"><i class="fa-solid fa-desktop"></i><h3>Desktop Applications</h3><p>Task-focused desktop tools built with C# and .NET.</p></div>
+          <div class="service-card" data-reveal data-reveal-delay="100"><i class="fa-solid fa-mobile-screen-button"></i><h3>Mobile Development</h3><p>Cross-platform app prototypes using Flutter and Firebase.</p></div>
+          <div class="service-card" data-reveal data-reveal-delay="150"><i class="fa-solid fa-pen-ruler"></i><h3>UI/UX Design</h3><p>Wireframes and interfaces in Figma that put the user's task first.</p></div>
+          <div class="service-card" data-reveal data-reveal-delay="200"><i class="fa-solid fa-database"></i><h3>Database Design</h3><p>Normalized MySQL schemas and CRUD APIs that scale cleanly.</p></div>
+          <div class="service-card" data-reveal data-reveal-delay="250"><i class="fa-solid fa-shield-halved"></i><h3>Security-Minded Builds</h3><p>Applications designed with basic threat modeling and safe defaults in mind.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         CONTACT
+         ================================================================ -->
+    <section id="contact" class="section contact">
+      <div class="container">
+        <p class="section__eyebrow" data-reveal>Get In Touch</p>
+        <h2 class="section__title" data-reveal>Let's Build Something</h2>
+
+        <div class="contact__grid">
+          <div class="contact__info" data-reveal>
+            <p>Have a project, an internship opening, or just a question about one of my builds? My inbox is open.</p>
+            <ul class="contact__list">
+              <li><i class="fa-solid fa-envelope"></i> edjaeursal90@gmail.com</li>
+              <li><i class="fa-solid fa-phone"></i>09351853538</li>
+              <li><i class="fa-solid fa-location-dot"></i>Pangabuan,Tangub,City</li>
+            </ul>
+            <div class="hero__socials contact__socials">
+               <a href="https://github.com/EDJAE" target="_blank" rel="noopener" aria-label="GitHub" class="social-icon"><i class="fa-brands fa-github"></i></a>
+               <a href="https://www.facebook.com/aifhshcj" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+               <a href="https://www.instagram.com/ur_edjae/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+          </div>
+
+          <form class="contact__form" id="contactForm" data-reveal data-reveal-delay="150" novalidate>
+            <div class="field">
+              <input type="text" id="cName" name="name" placeholder=" " required />
+              <label for="cName">Your Name</label>
+              <span class="field__error">Please enter your name.</span>
+            </div>
+            <div class="field">
+              <input type="email" id="cEmail" name="email" placeholder=" " required />
+              <label for="cEmail">Your Email</label>
+              <span class="field__error">Please enter a valid email.</span>
+            </div>
+            <div class="field">
+              <input type="text" id="cSubject" name="subject" placeholder=" " required />
+              <label for="cSubject">Subject</label>
+              <span class="field__error">Please enter a subject.</span>
+            </div>
+            <div class="field">
+              <textarea id="cMessage" name="message" rows="5" placeholder=" " required></textarea>
+              <label for="cMessage">Message</label>
+              <span class="field__error">Please enter a message.</span>
+            </div>
+            <button type="submit" class="btn btn--primary ripple magnetic" id="contactSubmit">
+              <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+            <p class="form__status" id="formStatus" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================================================
+       FOOTER
+       ================================================================ -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <a href="#home" class="navbar__logo" data-link>EJ<span class="dot">.</span></a>
+        <p>Software engineer in training, one project at a time Tangub City, Philippines.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about" data-link>About</a></li>
+          <li><a href="#skills" data-link>Skills</a></li>
+          <li><a href="#projects" data-link>Projects</a></li>
+          <li><a href="#contact" data-link>Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <div class="hero__socials">
+           <a href="https://github.com/EDJAE" target="_blank" rel="noopener" aria-label="GitHub" class="social-icon"><i class="fa-brands fa-github"></i></a>
+           <a href="https://www.facebook.com/aifhshcj" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+           <a href="https://www.instagram.com/ur_edjae/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom container">
+      <p>&copy; <span id="year"></span> Edjae Ursal. All rights reserved.</p>
+      <button id="backToTop" class="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
