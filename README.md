@@ -97,7 +97,9 @@ npm run preview
 
 ## Deployment
 
-This project uses Vite, so the site must be built before it can be served by GitHub Pages. Build the project with `npm run build` and deploy the contents of `dist/`, or use a GitHub Actions workflow to build and publish automatically.
+This project uses Vite, so the site must be built before it can be served by GitHub Pages. The workflow in `.github/workflows/deploy.yml` builds the project and publishes the `dist/` folder automatically on every push to `main`.
+
+In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. After that, every push to `main` deploys the site automatically.
 
 ## Contact
 
