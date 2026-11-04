@@ -1,4 +1,20 @@
-import { useEffect, useRef } from 'react';
+import {
+  useEffect,
+  useRef,
+  type ElementType,
+  type MutableRefObject,
+  type ReactNode,
+  type Ref,
+} from 'react';
+
+type RevealProps = {
+  as?: ElementType;
+  delay?: number;
+  className?: string;
+  children?: ReactNode;
+  innerRef?: Ref<HTMLElement> | ((node: HTMLElement | null) => void);
+  [key: string]: unknown;
+};
 
 export default function Reveal({
   as: Tag = 'div',
@@ -7,13 +23,13 @@ export default function Reveal({
   children,
   innerRef,
   ...rest
-}) {
-  const ref = useRef(null);
+}: RevealProps) {
+  const ref = useRef<HTMLElement | null>(null);
 
-  const setRefs = (node) => {
+  const setRefs = (node: HTMLElement | null) => {
     ref.current = node;
     if (typeof innerRef === 'function') innerRef(node);
-    else if (innerRef) innerRef.current = node;
+    else if (innerRef) (innerRef as MutableRefObject<HTMLElement | null>).current = node;
   };
 
   useEffect(() => {

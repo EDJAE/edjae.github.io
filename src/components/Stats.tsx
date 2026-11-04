@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Reveal from './Reveal.jsx';
+import Reveal from './Reveal';
 
 const STATS = [
   { target: 9, label: 'Projects Built', delay: 0 },
@@ -7,15 +7,15 @@ const STATS = [
   { target: 3, label: 'Years Learning to Code', delay: 300 },
 ];
 
-function Counter({ target }) {
-  const ref = useRef(null);
+function Counter({ target }: { target: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
   const [value, setValue] = useState(0);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    let timer;
+    let timer: ReturnType<typeof setInterval> | undefined;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -28,7 +28,7 @@ function Counter({ target }) {
             current += step;
             if (current >= target) {
               current = target;
-              clearInterval(timer);
+              if (timer) clearInterval(timer);
             }
             setValue(current);
           }, 25);
@@ -43,7 +43,7 @@ function Counter({ target }) {
 
     return () => {
       observer.disconnect();
-      clearInterval(timer);
+      if (timer) clearInterval(timer);
     };
   }, [target]);
 

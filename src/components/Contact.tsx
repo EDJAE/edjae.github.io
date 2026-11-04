@@ -1,17 +1,32 @@
-import { useEffect, useRef, useState } from 'react';
-import Reveal from './Reveal.jsx';
-import { attachMagnetic, attachRipple } from '../utils/effects.js';
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
+import Reveal from './Reveal';
+import { attachMagnetic, attachRipple } from '../utils/effects';
 
-const INITIAL_FORM = { name: '', email: '', subject: '', message: '' };
+type FormValues = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
 
-const VALIDATORS = {
+type FieldName = keyof FormValues;
+
+const INITIAL_FORM: FormValues = { name: '', email: '', subject: '', message: '' };
+
+const VALIDATORS: Record<FieldName, (value: string) => boolean> = {
   name: (value) => value.trim().length > 1,
   email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
   subject: (value) => value.trim().length > 1,
   message: (value) => value.trim().length > 5,
 };
 
-const FIELDS = [
+const FIELDS: {
+  name: FieldName;
+  id: string;
+  label: string;
+  type: 'text' | 'email' | 'textarea';
+  error: string;
+}[] = [
   { name: 'name', id: 'cName', label: 'Your Name', type: 'text', error: 'Please enter your name.' },
   {
     name: 'email',
@@ -37,11 +52,11 @@ const FIELDS = [
 ];
 
 export default function Contact() {
-  const [form, setForm] = useState(INITIAL_FORM);
-  const [errors, setErrors] = useState({});
+  const [form, setForm] = useState<FormValues>(INITIAL_FORM);
+  const [errors, setErrors] = useState<Partial<Record<FieldName, boolean>>>({});
   const [status, setStatus] = useState({ text: '', color: '' });
-  const submitRef = useRef(null);
-  const statusTimer = useRef(null);
+  const submitRef = useRef<HTMLButtonElement>(null);
+  const statusTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const el = submitRef.current;
@@ -50,24 +65,30 @@ export default function Contact() {
     return () => cleanups.forEach((cleanup) => cleanup());
   }, []);
 
-  useEffect(() => () => clearTimeout(statusTimer.current), []);
+  useEffect(
+    () => () => {
+      if (statusTimer.current) clearTimeout(statusTimer.current);
+    },
+    []
+  );
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const field = name as FieldName;
+    setForm((prev) => ({ ...prev, [field]: value }));
 
-    if (errors[name] && VALIDATORS[name](value)) {
-      setErrors((prev) => ({ ...prev, [name]: false }));
+    if (errors[field] && VALIDATORS[field](value)) {
+      setErrors((prev) => ({ ...prev, [field]: false }));
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const nextErrors = {};
+    const nextErrors: Partial<Record<FieldName, boolean>> = {};
     let valid = true;
 
-    Object.entries(VALIDATORS).forEach(([name, validate]) => {
-      const ok = validate(form[name]);
+    (Object.keys(VALIDATORS) as FieldName[]).forEach((name) => {
+      const ok = VALIDATORS[name](form[name]);
       nextErrors[name] = !ok;
       if (!ok) valid = false;
     });
@@ -84,7 +105,7 @@ export default function Contact() {
       color: 'var(--success)',
     });
     setForm(INITIAL_FORM);
-    clearTimeout(statusTimer.current);
+    if (statusTimer.current) clearTimeout(statusTimer.current);
     statusTimer.current = setTimeout(() => setStatus({ text: '', color: '' }), 5000);
   };
 
@@ -160,7 +181,7 @@ export default function Contact() {
                   <textarea
                     id={field.id}
                     name={field.name}
-                    rows="5"
+                    rows={5}
                     placeholder=" "
                     required
                     value={form[field.name]}

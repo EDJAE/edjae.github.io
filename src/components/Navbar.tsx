@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
 
 const NAV_LINKS = [
   { href: '#home', label: 'Home' },
@@ -28,11 +28,11 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [active, setActive] = useState('home');
 
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLLIElement>(null);
   const lastY = useRef(0);
 
   useEffect(() => {
-    const sections = [...document.querySelectorAll('main section[id]')];
+    const sections = [...document.querySelectorAll<HTMLElement>('main section[id]')];
 
     const onScroll = () => {
       const y = window.scrollY;
@@ -54,13 +54,13 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const onDocumentClick = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const onDocumentClick = (event: globalThis.MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setDropdownOpen(false);
       }
     };
 
-    const onKeyDown = (event) => {
+    const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setDropdownOpen(false);
         setMenuOpen(false);
@@ -89,14 +89,14 @@ export default function Navbar() {
     });
   };
 
-  const handleProjectClick = (event, title) => {
+  const handleProjectClick = (event: MouseEvent<HTMLAnchorElement>, title: string) => {
     event.preventDefault();
     setDropdownOpen(false);
     setMenuOpen(false);
 
     setTimeout(() => {
-      const card = [...document.querySelectorAll('.project-card')].find(
-        (item) => item.querySelector('h3')?.textContent.trim() === title
+      const card = [...document.querySelectorAll<HTMLElement>('.project-card')].find(
+        (item) => item.querySelector('h3')?.textContent?.trim() === title
       );
 
       if (!card) return;

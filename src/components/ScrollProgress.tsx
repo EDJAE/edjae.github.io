@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 export default function ScrollProgress() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => {

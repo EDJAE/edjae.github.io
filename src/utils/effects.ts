@@ -1,7 +1,7 @@
-export function attachMagnetic(el) {
+export function attachMagnetic(el: HTMLElement | null): () => void {
   if (!el || window.matchMedia('(hover: none)').matches) return () => {};
 
-  const move = (event) => {
+  const move = (event: MouseEvent) => {
     const rect = el.getBoundingClientRect();
     const x = event.clientX - rect.left - rect.width / 2;
     const y = event.clientY - rect.top - rect.height / 2;
@@ -21,10 +21,10 @@ export function attachMagnetic(el) {
   };
 }
 
-export function attachRipple(el) {
+export function attachRipple(el: HTMLElement | null): () => void {
   if (!el) return () => {};
 
-  const click = (event) => {
+  const click = (event: MouseEvent) => {
     const rect = el.getBoundingClientRect();
     const circle = document.createElement('span');
     const size = Math.max(rect.width, rect.height);

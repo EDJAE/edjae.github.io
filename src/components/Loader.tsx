@@ -9,7 +9,7 @@ export default function Loader() {
   useEffect(() => {
     let lineIndex = 0;
     let charIndex = 0;
-    let timer;
+    let timer: ReturnType<typeof setTimeout> | undefined;
 
     const tick = () => {
       if (lineIndex >= LINES.length) {
@@ -34,7 +34,7 @@ export default function Loader() {
     const safety = setTimeout(() => setHidden(true), 4000);
 
     return () => {
-      clearTimeout(timer);
+      if (timer) clearTimeout(timer);
       clearTimeout(safety);
     };
   }, []);
@@ -46,7 +46,7 @@ export default function Loader() {
         <span id="loaderText" className="loader__text">
           {text}
         </span>
-        <span className="loader__cursor">▌</span>
+        <span className="loader__cursor">▊</span>
       </div>
     </div>
   );

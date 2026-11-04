@@ -1,4 +1,4 @@
-import Reveal from './Reveal.jsx';
+import Reveal from './Reveal';
 
 const PROJECTS = [
   {

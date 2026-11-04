@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import Particles from './Particles.jsx';
-import Reveal from './Reveal.jsx';
-import { attachMagnetic, attachRipple } from '../utils/effects.js';
+import Particles from './Particles';
+import Reveal from './Reveal';
+import { attachMagnetic, attachRipple } from '../utils/effects';
 
 const PHRASES = [
   'Future Software Engineer',
@@ -12,15 +12,15 @@ const PHRASES = [
 
 export default function Hero() {
   const [typed, setTyped] = useState('');
-  const ctaRef = useRef(null);
-  const visualRef = useRef(null);
-  const ringRef = useRef(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const visualRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let phraseIndex = 0;
     let charIndex = 0;
     let deleting = false;
-    let timer;
+    let timer: ReturnType<typeof setTimeout> | undefined;
 
     const tick = () => {
       const phrase = PHRASES[phraseIndex];
@@ -46,7 +46,9 @@ export default function Hero() {
     };
 
     tick();
-    return () => clearTimeout(timer);
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   useEffect(() => {
@@ -55,7 +57,7 @@ export default function Hero() {
 
     if (!card || !wrapper || window.matchMedia('(hover: none)').matches) return;
 
-    const move = (event) => {
+    const move = (event: MouseEvent) => {
       const rect = wrapper.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width - 0.5;
       const y = (event.clientY - rect.top) / rect.height - 0.5;
@@ -79,7 +81,7 @@ export default function Hero() {
     const container = ctaRef.current;
     if (!container) return;
 
-    const elements = [...container.querySelectorAll('.magnetic')];
+    const elements = [...container.querySelectorAll<HTMLElement>('.magnetic')];
     const cleanups = elements.flatMap((el) => [attachMagnetic(el), attachRipple(el)]);
 
     return () => cleanups.forEach((cleanup) => cleanup());

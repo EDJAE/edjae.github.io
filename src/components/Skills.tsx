@@ -1,14 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
-import Reveal from './Reveal.jsx';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import Reveal from './Reveal';
 
-const TABS = [
+type SkillTab = 'languages' | 'frameworks' | 'tools' | 'soft';
+
+type Skill = {
+  icon: string;
+  name: string;
+  pct: number;
+};
+
+const TABS: { id: SkillTab; label: string }[] = [
   { id: 'languages', label: 'Languages' },
   { id: 'frameworks', label: 'Frameworks' },
   { id: 'tools', label: 'Tools' },
   { id: 'soft', label: 'Soft Skills' },
 ];
 
-const SKILLS = {
+const SKILLS: Record<Exclude<SkillTab, 'soft'>, Skill[]> = {
   languages: [
     { icon: 'fa-brands fa-html5', name: 'HTML', pct: 95 },
     { icon: 'fa-brands fa-css3-alt', name: 'CSS', pct: 90 },
@@ -44,8 +52,8 @@ const SOFT_SKILLS = [
   { icon: 'fa-solid fa-clock', label: 'Time Management' },
 ];
 
-function SkillCard({ icon, name, pct, delay }) {
-  const ref = useRef(null);
+function SkillCard({ icon, name, pct, delay }: Skill & { delay: number }) {
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -77,7 +85,7 @@ function SkillCard({ icon, name, pct, delay }) {
       <i className={icon}></i>
       <h4>{name}</h4>
       <div className="bar">
-        <span style={{ '--pct': `${pct}%` }}></span>
+        <span style={{ '--pct': `${pct}%` } as CSSProperties}></span>
       </div>
       <em>{pct}%</em>
     </div>
@@ -85,7 +93,8 @@ function SkillCard({ icon, name, pct, delay }) {
 }
 
 export default function Skills() {
-  const [activeTab, setActiveTab] = useState('languages');
+  const [activeTab, setActiveTab] = useState<SkillTab>('languages');
+  const skillList = activeTab === 'soft' ? [] : SKILLS[activeTab];
 
   return (
     <section id="skills" className="section skills">
@@ -125,7 +134,7 @@ export default function Skills() {
             </div>
           ) : (
             <div className="skill-grid">
-              {SKILLS[activeTab].map((skill, index) => (
+              {skillList.map((skill, index) => (
                 <SkillCard
                   key={skill.name}
                   icon={skill.icon}

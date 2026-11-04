@@ -1,17 +1,27 @@
 import { useEffect, useRef } from 'react';
 
+type Particle = {
+  x: number;
+  y: number;
+  r: number;
+  vx: number;
+  vy: number;
+};
+
 export default function Particles() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = ref.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-    let particles = [];
+    if (!ctx) return;
+
+    let particles: Particle[] = [];
     let width = 0;
     let height = 0;
-    let frame;
+    let frame = 0;
 
     const resize = () => {
       width = canvas.width = canvas.offsetWidth;
